@@ -23,9 +23,22 @@
             localStorage.setItem('expires_at',expiresAt);
         }
 
+        function logout(){
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('id_token');
+            localStorage.removeItem('expires_at');
+        }
+
+        function isAuthenticated(){
+            var expires_at=JSON.parse(localStorage.getItem('expires_at'));
+            return new Date().getTime()<expires_at;
+        }
+
         return {
             login: login,
-            handleAuthentication: handleAuthentication
+            handleAuthentication: handleAuthentication,
+            logout: logout,
+            isAuthenticated: isAuthenticated
         };
     }
 })();
