@@ -9,6 +9,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
                 </li>
+                <li class="nav-item" ng-if="vm.auth.isAuthenticated()">
+                    <a class="nav-link" ui-sref="profile">Profile</a>
+                </li>
                 <li class="nav-item" ng-if="!vm.auth.isAuthenticated()">
                     <a class="nav-link" ng-click="vm.auth.login()">Log In</a>
                 </li>

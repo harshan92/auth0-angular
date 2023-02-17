@@ -15,6 +15,12 @@
             controller:'CallbackController',
             templateUrl:'app/callback/callback.html',
             controllerAs: 'vm'
+        }).state('profile',
+        {
+            url:'/profile',
+            controller:'ProfileController',
+            templateUrl:'app/profile/profile.html',
+            controllerAs: 'vm'
         });
 
         angularAuth0Provider.init({
@@ -22,7 +28,7 @@
             domain:'dev-oc4r10h8h01y4zn6.us.auth0.com',
             responseType:'token id_token',
             redirectUri:'http://localhost:4200/callback',
-            scope:'openid'
+            scope:'openid profile'
         });
 
         $urlRouterProvider.otherwise('/');
