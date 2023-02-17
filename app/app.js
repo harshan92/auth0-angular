@@ -1,9 +1,9 @@
 (function(){
-    angular.module('app',['auth0.auth0', 'ui.router']).config(config);
+    angular.module('app',['auth0.auth0', 'ui.router','angular-jwt']).config(config);
 
-    config.$inject=['$stateProvider', '$locationProvider', '$urlRouterProvider', 'angularAuth0Provider'];
+    config.$inject=['$stateProvider', '$locationProvider', '$urlRouterProvider','$httpProvider', 'angularAuth0Provider','jwtOptionsProvider', '$httpProvider'];
 
-    function config($stateProvider, $locationProvider, $urlRouterProvider, angularAuth0Provider){
+    function config($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider, angularAuth0Provider, jwtOptionsProvider){
         $stateProvider.state('home',{
             url:'/',
             controller:'HomeController',
@@ -28,8 +28,18 @@
             domain:'dev-oc4r10h8h01y4zn6.us.auth0.com',
             responseType:'token id_token',
             redirectUri:'http://localhost:4200/callback',
-            scope:'openid profile'
+            scope:'openid profile',
+            audience: 'https://harshan-dev-92.com/api'
         });
+
+        jwtOptionsProvider.config({
+            tokenGetter:function(){
+                return localStorage.getItem("access_token");
+            },
+            whiteListedDomains:['localhost'],
+        });
+
+        $httpProvider.interceptors.push('jwtInterceptor');
 
         $urlRouterProvider.otherwise('/');
 
