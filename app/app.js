@@ -17,6 +17,14 @@
             controllerAs: 'vm'
         });
 
+        angularAuth0Provider.init({
+            clientID:'Y4ViN6UJGrp9kb2fU8bhDuQa9WB6WB6E',
+            domain:'dev-oc4r10h8h01y4zn6.us.auth0.com',
+            responseType:'token id_token',
+            redirectUri:'http://localhost:4200/callback',
+            scope:'openid'
+        });
+
         $urlRouterProvider.otherwise('/');
 
         $locationProvider.hashPrefix('');

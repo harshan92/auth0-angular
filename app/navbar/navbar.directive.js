@@ -9,5 +9,9 @@
         };
     }
 
-    function navbarController(){}
+    navbarController.$inject=["authService"];
+    function navbarController(authService){
+        var vm=this;
+        vm.auth=authService;
+    }
 })();
